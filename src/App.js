@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import Header from './components/Header';
 import Search from './components/Search';
@@ -14,9 +14,9 @@ function App() {
 
   useEffect(() => {
     fetchInitialMovies();
-  }, []);
+  }, [fetchInitialMovies]);
 
-  const fetchInitialMovies = async () => {
+  const fetchInitialMovies = useCallback(async () => {
     try {
       const response = await axios.get(`${BASE_URL}/?apikey=${API_KEY}&s=marvel`);
       if (response.data.Response === 'False') {
@@ -32,7 +32,7 @@ function App() {
       setMovies([]);
       setLoading(false);
     }
-  };
+  }, [API_KEY, BASE_URL]);
 
   const handleSearch = async (query) => {
     setLoading(true);
