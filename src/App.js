@@ -12,10 +12,6 @@ function App() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const BASE_URL = 'https://www.omdbapi.com';
 
-  useEffect(() => {
-    fetchInitialMovies();
-  }, [fetchInitialMovies]);
-
   const fetchInitialMovies = useCallback(async () => {
     try {
       const response = await axios.get(`${BASE_URL}/?apikey=${API_KEY}&s=marvel`);
@@ -33,6 +29,10 @@ function App() {
       setLoading(false);
     }
   }, [API_KEY, BASE_URL]);
+
+  useEffect(() => {
+    fetchInitialMovies();
+  }, [fetchInitialMovies]);
 
   const handleSearch = async (query) => {
     setLoading(true);
