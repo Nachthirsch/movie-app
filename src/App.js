@@ -16,7 +16,7 @@ function App() {
     try {
       const response = await axios.get(`${BASE_URL}/?apikey=${API_KEY}&s=marvel`);
       if (response.data.Response === 'False') {
-        setError(response.data.Error || 'No movies found');
+        setError(response.data.Error || 'No movies found, bruh');
         setMovies([]);
       } else {
         setMovies(response.data.Search || []);
